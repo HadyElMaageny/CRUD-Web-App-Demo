@@ -24,4 +24,7 @@ $router->delete('/note', 'controllers/notes/destroy.php');
 
 $router->post('/notes', 'controllers/notes/store.php');
 
+$router->get('/register', 'controllers/registration/create.php');
+$router->post('/register', 'controllers/registration/store.php');
+
 //dd($router->routes);
