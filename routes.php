@@ -27,4 +27,12 @@ $router->post('/notes', 'controllers/notes/store.php');
 $router->get('/register', 'controllers/registration/create.php');
 $router->post('/register', 'controllers/registration/store.php');
 
+$router->get('/employees', 'controllers/employees/index.php');
+$router->get('/employees/create', 'controllers/employees/create.php');
+$router->post('/employees', 'controllers/employees/store.php');
+$router->get('/employee', 'controllers/employees/show.php');
+$router->get('/employee/edit', 'controllers/employees/edit.php');
+$router->patch('/employee', 'controllers/employees/update.php');
+$router->delete('/employee', 'controllers/employees/destroy.php');
+
 //dd($router->routes);

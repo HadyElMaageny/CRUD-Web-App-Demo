@@ -13,4 +13,11 @@ class Validator
     {
         return filter_var($value, FILTER_VALIDATE_EMAIL);
     }
+
+    public static function select($value, array $validOptions)
+    {
+        // Check if the selected value exists in the array of valid options
+        return in_array($value, $validOptions, true);
+    }
+
 }
