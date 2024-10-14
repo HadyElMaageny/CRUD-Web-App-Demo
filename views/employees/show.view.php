@@ -7,14 +7,33 @@
             <p class="mb-6">
                 <a href="/employees" class="text-blue-500 underline">Go back...</a>
             </p>
-            <table border="1" cellpadding="10">
+            <style>
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                }
+
+                table, th, td {
+                    border: 1px solid black;
+                }
+
+                th, td {
+                    padding: 8px;
+                    text-align: left;
+                }
+
+                th {
+                    background-color: #f2f2f2;
+                }
+            </style>
+            <table class="mt-10">
                 <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>Id</th>
                     <th>Name</th>
                     <th>Gender</th>
                     <th>Department</th>
-                    <th>Edit</th>
+                    <th>Show</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -23,11 +42,12 @@
                     <td><?= htmlspecialchars($employee['name']) ?></td>
                     <td><?= htmlspecialchars($employee['gender']) ?></td>
                     <td><?= htmlspecialchars($employee['department']) ?></td>
-                    <td><a href="/employee/edit?id=<?= $employee['id']?>" class="text-blue-500 underline">Edit</a></td>
+                    <td>
+                        <a href="/employee/edit?id=<?= $employee['id'] ?>" class="text-blue-500 underline">Edit</a>
+                    </td>
                 </tr>
                 </tbody>
             </table>
-
             <form class="mt-6" method="POST">
                 <input type="hidden" name="_method" value="DELETE">
                 <input type="hidden" name="id" value="<?= $employee['id'] ?>">
