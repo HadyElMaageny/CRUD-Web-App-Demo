@@ -9,5 +9,5 @@ $db->query("DELETE FROM employees where id = :id", [
     'id' => $_POST['id']
 ]);
 
-header('Location: /employees');
+header('Location: /employees?page=1');
 exit();

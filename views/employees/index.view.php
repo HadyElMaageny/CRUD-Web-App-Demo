@@ -50,15 +50,40 @@
                 <?php endforeach; ?>
                 </tbody>
             </table>
-            <!--    --><?php //foreach ($employees as $employee): ?>
-            <!--        <li>-->
-            <!--            <a href="employee?id=-->
-            <?php //= $employee['id'] ?><!--" class="text-blue-500 hover:underline">-->
-            <!--                --><?php //= htmlspecialchars($employee['name']) ?>
-            <!--            </a>-->
-            <!--        </li>-->
-            <!--    --><?php //endforeach; ?>
+            <div class="mt-4">
+                <ul class="flex space-x-2">
+                    <li>
+                        <a href="?page=1" class="text-blue-500 underline <?= $currentPage == 1 ? 'font-bold' : '' ?>">1</a>
+                    </li>
 
+                    <!-- Show dots if current page is far from the first few pages -->
+                    <?php if ($currentPage > 4): ?>
+                        <li><span>...</span></li>
+                    <?php endif; ?>
+
+                    <!-- Show links around the current page -->
+                    <?php for ($i = max(2, $currentPage - 2); $i <= min($currentPage + 2, $pagesCount - 1); $i++): ?>
+                        <li>
+                            <a href="?page=<?= $i ?>" class="text-blue-500 underline <?= $i == $currentPage ? 'font-bold' : '' ?>">
+                                <?= $i ?>
+                            </a>
+                        </li>
+                    <?php endfor; ?>
+
+                    <!-- Show dots if current page is far from the last pages -->
+                    <?php if ($currentPage < $pagesCount - 3): ?>
+                        <li><span>...</span></li>
+                    <?php endif; ?>
+
+                    <!-- Always show the last page link -->
+                    <li>
+                        <a href="?page=<?= $pagesCount ?>" class="text-blue-500 underline <?= $currentPage == $pagesCount ? 'font-bold' : '' ?>">
+                            <?= $pagesCount ?>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
         </div>
 
 

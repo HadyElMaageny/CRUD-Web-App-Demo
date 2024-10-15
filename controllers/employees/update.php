@@ -41,5 +41,5 @@ if (empty($errors)) {
     ]);
 }
 
-header('location: /employees');
+header('location: /employees?page=1');
 exit();

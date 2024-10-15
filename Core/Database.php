@@ -21,11 +21,18 @@ class Database
 
     public function query($query, $parameters = [])
     {
-
-
         $this->statement = $this->connection->prepare($query);
         $this->statement->execute($parameters);
 
+        return $this;
+    }
+
+    public function queryPage($query, $limit, $offset)
+    {
+        $this->statement = $this->connection->prepare($query);
+        $this->statement->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $this->statement->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $this->statement->execute();
         return $this;
     }
 

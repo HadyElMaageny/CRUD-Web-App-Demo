@@ -35,5 +35,5 @@ if (empty($errors)) {
     ]);
 }
 
-header('Location: /employees');
+header('Location: /employees?page=1');
 exit;
