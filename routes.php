@@ -26,8 +26,12 @@ $router->post('/notes', 'controllers/notes/store.php');
 
 $router->get('/register', 'controllers/registration/create.php')->only('guest');
 $router->post('/register', 'controllers/registration/store.php');
+$router->get('/login', 'controllers/session/create.php')->only('guest');
+$router->post('/session', 'controllers/session/store.php')->only('guest');
+$router->delete('/session', 'controllers/session/destroy.php')->only('auth');
 
-$router->get('/employees', 'controllers/employees/index.php');
+
+$router->get('/employees', 'controllers/employees/index.php')->only('auth');
 $router->get('/employees/create', 'controllers/employees/create.php');
 $router->post('/employees', 'controllers/employees/store.php');
 $router->get('/employee', 'controllers/employees/show.php');

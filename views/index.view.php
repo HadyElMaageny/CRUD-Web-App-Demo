@@ -4,7 +4,7 @@
 <?php require 'partials/banner.php' ?>
     <main>
         <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-            <p>Hello, You are in the Home Page.</p>
+            <p>Hello, <?= $_SESSION['user']['email'] ?? 'Guest'?> You are in the Home Page.</p>
         </div>
     </main>
 <?php require 'partials/footer.php' ?>
