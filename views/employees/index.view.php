@@ -29,13 +29,59 @@
             <table class="mt-10">
                 <thead>
                 <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Gender</th>
-                    <th>Department</th>
+                    <th>
+                        Id
+                        <a href="?page=<?= $currentPage ?>&sort=id&direction=asc" class="text-blue-500">▲</a>
+                        <a href="?page=<?= $currentPage ?>&sort=id&direction=desc" class="text-blue-500">▼</a>
+                    </th>
+                    <th>
+                        Name
+                        <a href="?page=<?= $currentPage ?>&sort=name&direction=asc" class="text-blue-500">▲</a>
+                        <a href="?page=<?= $currentPage ?>&sort=name&direction=desc" class="text-blue-500">▼</a>
+                    </th>
+                    <th>
+                        Gender
+                        <a href="?page=<?= $currentPage ?>&sort=gender&direction=asc" class="text-blue-500">▲</a>
+                        <a href="?page=<?= $currentPage ?>&sort=gender&direction=desc" class="text-blue-500">▼</a>
+                    </th>
+                    <th>
+                        Department
+                        <a href="?page=<?= $currentPage ?>&sort=department&direction=asc" class="text-blue-500">▲</a>
+                        <a href="?page=<?= $currentPage ?>&sort=department&direction=desc" class="text-blue-500">▼</a>
+                    </th>
                     <th>Show</th>
                 </tr>
                 </thead>
+                <!--                <thead>-->
+                <!--                <tr>-->
+                <!--                    <th>-->
+                <!--                        Id-->
+                <!--                        <a href="?page=--><?php //= $currentPage ?><!--&sort=id&direction=-->
+                <?php //= $sortDirection == 'asc' ? 'desc' : 'asc' ?><!--"-->
+                <!--                           class="ml-2 text-blue-500">Sort</a>-->
+                <!--                    </th>-->
+                <!--                    <th>-->
+                <!--                        Name-->
+                <!--                        <a href="?page=--><?php //= $currentPage ?><!--&sort=name&direction=-->
+                <?php //= $sortDirection == 'asc' ? 'desc' : 'asc' ?><!--"-->
+                <!--                           class="ml-2 text-blue-500">Sort</a>-->
+                <!--                    </th>-->
+                <!--                    <th>-->
+                <!--                        Gender-->
+                <!--                        <a href="?page=--><?php //= $currentPage ?><!--&sort=gender&direction=-->
+                <?php //= $sortDirection == 'asc' ? 'desc' : 'asc' ?><!--"-->
+                <!--                           class="ml-2 text-blue-500">Sort</a>-->
+                <!--                    </th>-->
+                <!--                    <th>-->
+                <!--                        Department-->
+                <!--                        <a href="?page=-->
+                <?php //= $currentPage ?><!--&sort=department&direction=-->
+                <?php //= $sortDirection == 'asc' ? 'desc' : 'asc' ?><!--"-->
+                <!--                           class="ml-2 text-blue-500">Sort</a>-->
+                <!--                    </th>-->
+                <!--                    <th>Show</th>-->
+                <!--                </tr>-->
+                <!--                </thead>-->
                 <tbody>
                 <?php foreach ($employees as $employee): ?>
                     <tr>
@@ -53,7 +99,8 @@
             <div class="mt-4">
                 <ul class="flex space-x-2">
                     <li>
-                        <a href="?page=1" class="text-blue-500 underline <?= $currentPage == 1 ? 'font-bold' : '' ?>">1</a>
+                        <a href="?page=1"
+                           class="text-blue-500 underline <?= $currentPage == 1 ? 'font-bold' : '' ?>">1</a>
                     </li>
 
                     <!-- Show dots if current page is far from the first few pages -->
@@ -64,7 +111,8 @@
                     <!-- Show links around the current page -->
                     <?php for ($i = max(2, $currentPage - 2); $i <= min($currentPage + 2, $pagesCount - 1); $i++): ?>
                         <li>
-                            <a href="?page=<?= $i ?>" class="text-blue-500 underline <?= $i == $currentPage ? 'font-bold' : '' ?>">
+                            <a href="?page=<?= $i ?>"
+                               class="text-blue-500 underline <?= $i == $currentPage ? 'font-bold' : '' ?>">
                                 <?= $i ?>
                             </a>
                         </li>
@@ -77,7 +125,8 @@
 
                     <!-- Always show the last page link -->
                     <li>
-                        <a href="?page=<?= $pagesCount ?>" class="text-blue-500 underline <?= $currentPage == $pagesCount ? 'font-bold' : '' ?>">
+                        <a href="?page=<?= $pagesCount ?>"
+                           class="text-blue-500 underline <?= $currentPage == $pagesCount ? 'font-bold' : '' ?>">
                             <?= $pagesCount ?>
                         </a>
                     </li>

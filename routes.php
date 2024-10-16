@@ -39,4 +39,6 @@ $router->get('/employee/edit', 'controllers/employees/edit.php');
 $router->patch('/employee', 'controllers/employees/update.php');
 $router->delete('/employee', 'controllers/employees/destroy.php');
 
+//$router->get('/admin', 'controllers/admin/create.php');
+
 //dd($router->routes);
