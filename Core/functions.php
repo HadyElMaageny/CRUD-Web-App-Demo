@@ -46,6 +46,7 @@ function login($user)
 {
     $_SESSION['user'] = [
         'email'=> $user['email'],
+        'role_id'=> $user['role_id']
     ];
 
     session_regenerate_id(true);
@@ -56,7 +57,7 @@ function adminLogin($user)
 {
     $_SESSION['user'] = [
         'email'=> $user['email'],
-        'is_admin'=> $user['is_admin'],
+        'role_id'=> $user['role_id'],
     ];
     session_regenerate_id(true);
 }

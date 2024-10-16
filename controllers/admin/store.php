@@ -33,7 +33,7 @@ $user = $db->query("SELECT * FROM users WHERE email = :email", [
 ])->find();
 
 if ($user) {
-    if (password_verify($password, $user['password']) && $user['is_admin']) {
+    if (password_verify($password, $user['password']) && $user['role_id'] == 1) {
         adminLogin($user);
         header('location: /');
         exit();

@@ -14,13 +14,17 @@
                            aria-current="page">Home</a>
                         <a href="/about"
                            class="rounded-md px-3 py-2 text-sm font-medium <?= urlIs('/about') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' ?> hover:bg-gray-700 hover:text-white">About</a>
-                        <?php if (($_SESSION['user']) ?? false): ?>
-                            <a href="/notes"
-                               class="rounded-md px-3 py-2 text-sm font-medium <?= urlIs('/notes') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' ?> hover:bg-gray-700 hover:text-white">Notes</a>
+                        <?php if ($_SESSION['user'] ?? false): ?>
+                            <?php if ($_SESSION['user']['role_id'] <= 2): ?>
+                                <a href="/notes"
+                                   class="rounded-md px-3 py-2 text-sm font-medium <?= urlIs('/notes') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' ?> hover:bg-gray-700 hover:text-white">Notes</a>
+                            <?php endif; ?>
                         <?php endif; ?>
-                        <?php if (($_SESSION['user']['is_admin']) ?? false): ?>
-                            <a href="/employees"
-                               class="rounded-md px-3 py-2 text-sm font-medium <?= urlIs('/employees') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' ?> hover:bg-gray-700 hover:text-white">Employees</a>
+                        <?php if ($_SESSION['user'] ?? false): ?>
+                            <?php if ($_SESSION['user']['role_id'] == 1): ?>
+                                <a href="/employees"
+                                   class="rounded-md px-3 py-2 text-sm font-medium <?= urlIs('/employees') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' ?> hover:bg-gray-700 hover:text-white">Employees</a>
+                            <?php endif; ?>
                         <?php endif; ?>
                         <a href="/contact"
                            class="rounded-md px-3 py-2 text-sm font-medium <?= urlIs('/contact') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' ?> hover:bg-gray-700 hover:text-white">Contact</a>
@@ -72,12 +76,8 @@
                                 <div class="ml-3">
                                     <a href="/register"
                                        class="<?= urlIs('/register') ? 'bg-gray-900 text-white' : 'text-gray-300' ?> hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Register</a>
-                                    <a href="/login"
-                                       class="<?= urlIs('/login') ? 'bg-gray-900 text-white' : 'text-gray-300' ?> hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Log
-                                        In</a>
-                                    <a href="/admin"
-                                       class="<?= urlIs('/admin ') ? 'bg-gray-900 text-white' : 'text-gray-300' ?> hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Admin
-                                        Log
+                                    <a href="/session"
+                                       class="<?= urlIs('/session') ? 'bg-gray-900 text-white' : 'text-gray-300' ?> hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Log
                                         In</a>
                                 </div>
                             <?php endif ?>

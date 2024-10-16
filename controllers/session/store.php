@@ -6,6 +6,10 @@ use Core\App;
 use Core\Database;
 use Core\Validator;
 
+const ADMIN_ROLE_ID = 1;
+const USER_ROLE_ID = 2;
+
+
 $email = $_POST['email'];
 $password = $_POST['password'];
 
@@ -34,9 +38,16 @@ $user = $db->query("SELECT * FROM users WHERE email = :email", [
 
 if ($user) {
     if (password_verify($password, $user['password'])) {
-        login($user);
-        header('location: /');
-        exit();
+        if ($user['role_id'] == ADMIN_ROLE_ID) {
+            adminLogin($user);
+            header('location: /');
+            exit();
+        }
+        elseif ($user['role_id'] == USER_ROLE_ID) {
+            login($user);
+            header('location: /');
+            exit();
+        }
     }
 }
 
