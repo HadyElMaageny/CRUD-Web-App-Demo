@@ -45,21 +45,13 @@ function view($path, $attributes = [])
 function login($user)
 {
     $_SESSION['user'] = [
+        'id' => $user['id'],
         'email'=> $user['email'],
         'role_id'=> $user['role_id']
     ];
 
     session_regenerate_id(true);
 
-}
-
-function adminLogin($user)
-{
-    $_SESSION['user'] = [
-        'email'=> $user['email'],
-        'role_id'=> $user['role_id'],
-    ];
-    session_regenerate_id(true);
 }
 
 function logout()

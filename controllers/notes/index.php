@@ -5,7 +5,12 @@ use Core\Database;
 
 $db = App::resolve(Database::class);
 
-$notes = $db->query('SELECT * FROM notes where user_id = 1')->all();
+
+$currentUser = $_SESSION['user']['id'];
+
+$notes = $db->query('SELECT * FROM notes where user_id = :user', [
+    'user' => $currentUser
+])->all();
 
 
 view('notes/index.view.php', [

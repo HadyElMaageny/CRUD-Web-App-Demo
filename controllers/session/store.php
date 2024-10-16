@@ -38,16 +38,9 @@ $user = $db->query("SELECT * FROM users WHERE email = :email", [
 
 if ($user) {
     if (password_verify($password, $user['password'])) {
-        if ($user['role_id'] == ADMIN_ROLE_ID) {
-            adminLogin($user);
-            header('location: /');
-            exit();
-        }
-        elseif ($user['role_id'] == USER_ROLE_ID) {
-            login($user);
-            header('location: /');
-            exit();
-        }
+        login($user);
+        header('location: /');
+        exit();
     }
 }
 
