@@ -27,12 +27,12 @@ class Database
         return $this;
     }
 
-    public function queryPage($query, $limit, $offset)
+    public function queryPage($query, $limit, $offset, $parameters = [])
     {
         $this->statement = $this->connection->prepare($query);
         $this->statement->bindParam(':limit', $limit, PDO::PARAM_INT);
         $this->statement->bindParam(':offset', $offset, PDO::PARAM_INT);
-        $this->statement->execute();
+        $this->statement->execute($parameters);
         return $this;
     }
 

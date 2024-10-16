@@ -26,76 +26,88 @@
                     background-color: #f2f2f2;
                 }
             </style>
-            <table class="mt-10">
-                <thead>
-                <tr>
-                    <th>
-                        Id
-                        <a href="?page=<?= $currentPage ?>&sort=id&direction=asc" class="text-blue-500">▲</a>
-                        <a href="?page=<?= $currentPage ?>&sort=id&direction=desc" class="text-blue-500">▼</a>
-                    </th>
-                    <th>
-                        Name
-                        <a href="?page=<?= $currentPage ?>&sort=name&direction=asc" class="text-blue-500">▲</a>
-                        <a href="?page=<?= $currentPage ?>&sort=name&direction=desc" class="text-blue-500">▼</a>
-                    </th>
-                    <th>
-                        Gender
-                        <a href="?page=<?= $currentPage ?>&sort=gender&direction=asc" class="text-blue-500">▲</a>
-                        <a href="?page=<?= $currentPage ?>&sort=gender&direction=desc" class="text-blue-500">▼</a>
-                    </th>
-                    <th>
-                        Department
-                        <a href="?page=<?= $currentPage ?>&sort=department&direction=asc" class="text-blue-500">▲</a>
-                        <a href="?page=<?= $currentPage ?>&sort=department&direction=desc" class="text-blue-500">▼</a>
-                    </th>
-                    <th>Show</th>
-                </tr>
-                </thead>
-                <!--                <thead>-->
-                <!--                <tr>-->
-                <!--                    <th>-->
-                <!--                        Id-->
-                <!--                        <a href="?page=--><?php //= $currentPage ?><!--&sort=id&direction=-->
-                <?php //= $sortDirection == 'asc' ? 'desc' : 'asc' ?><!--"-->
-                <!--                           class="ml-2 text-blue-500">Sort</a>-->
-                <!--                    </th>-->
-                <!--                    <th>-->
-                <!--                        Name-->
-                <!--                        <a href="?page=--><?php //= $currentPage ?><!--&sort=name&direction=-->
-                <?php //= $sortDirection == 'asc' ? 'desc' : 'asc' ?><!--"-->
-                <!--                           class="ml-2 text-blue-500">Sort</a>-->
-                <!--                    </th>-->
-                <!--                    <th>-->
-                <!--                        Gender-->
-                <!--                        <a href="?page=--><?php //= $currentPage ?><!--&sort=gender&direction=-->
-                <?php //= $sortDirection == 'asc' ? 'desc' : 'asc' ?><!--"-->
-                <!--                           class="ml-2 text-blue-500">Sort</a>-->
-                <!--                    </th>-->
-                <!--                    <th>-->
-                <!--                        Department-->
-                <!--                        <a href="?page=-->
-                <?php //= $currentPage ?><!--&sort=department&direction=-->
-                <?php //= $sortDirection == 'asc' ? 'desc' : 'asc' ?><!--"-->
-                <!--                           class="ml-2 text-blue-500">Sort</a>-->
-                <!--                    </th>-->
-                <!--                    <th>Show</th>-->
-                <!--                </tr>-->
-                <!--                </thead>-->
-                <tbody>
-                <?php foreach ($employees as $employee): ?>
+            <form>
+                <table class="mt-10">
+                    <thead>
                     <tr>
-                        <td><?= htmlspecialchars($employee['id']) ?></td>
-                        <td><?= htmlspecialchars($employee['name']) ?></td>
-                        <td><?= htmlspecialchars($employee['gender']) ?></td>
-                        <td><?= htmlspecialchars($employee['department']) ?></td>
-                        <td>
-                            <a href="employee?id=<?= $employee['id'] ?>" class="text-blue-500 underline">Show</a>
-                        </td>
+                        <th>
+                            Id
+                            <a href="?page=<?= $currentPage ?>&sort=id&direction=asc" class="text-blue-500">▲</a>
+                            <a href="?page=<?= $currentPage ?>&sort=id&direction=desc" class="text-blue-500">▼</a>
+                            <input type="text" id="filter-id" name="filter_id" placeholder="Search by ID"
+                                   class="text-xs p-1 border rounded">
+
+                        </th>
+                        <th>
+                            Name
+                            <a href="?page=<?= $currentPage ?>&sort=name&direction=asc" class="text-blue-500">▲</a>
+                            <a href="?page=<?= $currentPage ?>&sort=name&direction=desc" class="text-blue-500">▼</a>
+                            <input type="text" id="filter-name" name="filter-name" placeholder="Search by Name"
+                                   class="text-xs p-1 border rounded">
+                        </th>
+                        <th>
+                            Gender
+                            <a href="?page=<?= $currentPage ?>&sort=gender&direction=asc" class="text-blue-500">▲</a>
+                            <a href="?page=<?= $currentPage ?>&sort=gender&direction=desc" class="text-blue-500">▼</a>
+                            <input type="text" id="filter-gender" name="filter-gender" placeholder="Search by Gender"
+                                   class="text-xs p-1 border rounded">
+                        </th>
+                        <th>
+                            Department
+                            <a href="?page=<?= $currentPage ?>&sort=department&direction=asc" class="text-blue-500">▲</a>
+                            <a href="?page=<?= $currentPage ?>&sort=department&direction=desc" class="text-blue-500">▼</a>
+                            <input type="text" id="filter-department" name="filter-department"
+                                   placeholder="Search by Department" class="text-xs p-1 border rounded">
+                        </th>
+                        <th>Show</th>
                     </tr>
-                <?php endforeach; ?>
-                </tbody>
-            </table>
+                    </thead>
+                    <!--                <thead>-->
+                    <!--                <tr>-->
+                    <!--                    <th>-->
+                    <!--                        Id-->
+                    <!--                        <a href="?page=--><?php //= $currentPage ?><!--&sort=id&direction=-->
+                    <?php //= $sortDirection == 'asc' ? 'desc' : 'asc' ?><!--"-->
+                    <!--                           class="ml-2 text-blue-500">Sort</a>-->
+                    <!--                    </th>-->
+                    <!--                    <th>-->
+                    <!--                        Name-->
+                    <!--                        <a href="?page=--><?php //= $currentPage ?><!--&sort=name&direction=-->
+                    <?php //= $sortDirection == 'asc' ? 'desc' : 'asc' ?><!--"-->
+                    <!--                           class="ml-2 text-blue-500">Sort</a>-->
+                    <!--                    </th>-->
+                    <!--                    <th>-->
+                    <!--                        Gender-->
+                    <!--                        <a href="?page=--><?php //= $currentPage ?><!--&sort=gender&direction=-->
+                    <?php //= $sortDirection == 'asc' ? 'desc' : 'asc' ?><!--"-->
+                    <!--                           class="ml-2 text-blue-500">Sort</a>-->
+                    <!--                    </th>-->
+                    <!--                    <th>-->
+                    <!--                        Department-->
+                    <!--                        <a href="?page=-->
+                    <?php //= $currentPage ?><!--&sort=department&direction=-->
+                    <?php //= $sortDirection == 'asc' ? 'desc' : 'asc' ?><!--"-->
+                    <!--                           class="ml-2 text-blue-500">Sort</a>-->
+                    <!--                    </th>-->
+                    <!--                    <th>Show</th>-->
+                    <!--                </tr>-->
+                    <!--                </thead>-->
+                    <tbody>
+                    <?php foreach ($employees as $employee): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($employee['id']) ?></td>
+                            <td><?= htmlspecialchars($employee['name']) ?></td>
+                            <td><?= htmlspecialchars($employee['gender']) ?></td>
+                            <td><?= htmlspecialchars($employee['department']) ?></td>
+                            <td>
+                                <a href="employee?id=<?= $employee['id'] ?>" class="text-blue-500 underline">Show</a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+                <button type="submit">Submit</button>
+            </form>
             <div class="mt-4">
                 <ul class="flex space-x-2">
                     <li>

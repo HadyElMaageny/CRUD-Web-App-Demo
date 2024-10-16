@@ -5,11 +5,11 @@
             <div class="sm:mx-auto sm:w-full sm:max-w-sm">
                 <img class="mx-auto h-10 w-auto"
                      src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company">
-                <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Admin Login!</h2>
+                <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Create User!</h2>
             </div>
 
             <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                <form class="space-y-6" action="/admin" method="POST">
+                <form class="space-y-6" action="/users" method="POST">
                     <div>
                         <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email
                             address</label>
@@ -27,9 +27,16 @@
                         </div>
                     </div>
                     <div>
+                        <div class="flex items-center">
+                            <input id="is_admin" name="is_admin" type="checkbox"
+                                   class="h-4 w-4 text-indigo-600 focus:ring-indigo-600 border-gray-300 rounded">
+                            <label for="is_admin" class="ml-2 block text-sm text-gray-900">Admin</label>
+                        </div>
+                    </div>
+                    <div>
                         <button type="submit"
                                 class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                            Login
+                            Create
                         </button>
                     </div>
                     <ul>

@@ -3,6 +3,32 @@
 use Core\App;
 use Core\Database;
 
+//dd($_GET);
+$filters = [];
+
+if (isset($_GET['id'])) {
+    $filters[] = "id LIKE :id";
+}
+if (isset($_GET['name'])) {
+    $filters[] = "name LIKE :name";
+}
+if (isset($_GET['gender'])) {
+    $filters[] = "gender LIKE :gender";
+}
+if (isset($_GET['department'])) {
+    $filters[] = "department LIKE :department";
+}
+
+$filterQuery = implode(' AND ', $filters);
+$query = "SELECT * FROM employees";
+
+if (!empty($filterQuery)) {
+    $query .= " WHERE " . $filterQuery;
+}
+//dd($query);
+
+
+
 $db = App::resolve(Database::class);
 $sortColumn = $_GET['sort'] ?? 'id';
 $sortDirection = $_GET['direction'] ?? 'asc';
@@ -33,7 +59,6 @@ $pagesCount = ceil($count / $limit);
 $employees = $db->queryPage("SELECT * FROM (SELECT * FROM employees LIMIT :limit OFFSET :offset) AS limited_results ORDER BY $sortColumn $sortDirection", $limit, $offset)->all();
 
 
-// select * from employees
 
 view('employees\index.view.php', [
     'heading' => "Employees List",

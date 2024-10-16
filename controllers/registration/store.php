@@ -34,9 +34,11 @@ $user = $db->query("Select * from users where email = :email", [
 ])->find();
 // If yes, redirect to o login page.
 if ($user) {
-    login($user);
-    header('Location: /');
-    exit();
+    if (password_verify($password, $user['password'])) {
+        login($user);
+        header('location: /');
+        exit();
+    }
 } // If not, save one to the database, and then log the user in, and redirect.
 else {
     $user = $db->query("INSERT INTO users (email, password) VALUES (:email, :password)", [
