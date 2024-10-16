@@ -52,6 +52,15 @@ function login($user)
 
 }
 
+function adminLogin($user)
+{
+    $_SESSION['user'] = [
+        'email'=> $user['email'],
+        'is_admin'=> $user['is_admin'],
+    ];
+    session_regenerate_id(true);
+}
+
 function logout()
 {
     $_SESSION = [];

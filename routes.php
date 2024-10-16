@@ -28,17 +28,19 @@ $router->get('/register', 'controllers/registration/create.php')->only('guest');
 $router->post('/register', 'controllers/registration/store.php');
 $router->get('/login', 'controllers/session/create.php')->only('guest');
 $router->post('/session', 'controllers/session/store.php')->only('guest');
+
 $router->delete('/session', 'controllers/session/destroy.php')->only('auth');
 
 
-$router->get('/employees', 'controllers/employees/index.php')->only('auth');
-$router->get('/employees/create', 'controllers/employees/create.php');
+$router->get('/employees', 'controllers/employees/index.php')->only('admin');
+$router->get('/employees/create', 'controllers/employees/create.php')->only('admin');
 $router->post('/employees', 'controllers/employees/store.php');
-$router->get('/employee', 'controllers/employees/show.php');
-$router->get('/employee/edit', 'controllers/employees/edit.php');
-$router->patch('/employee', 'controllers/employees/update.php');
-$router->delete('/employee', 'controllers/employees/destroy.php');
+$router->get('/employee', 'controllers/employees/show.php')->only('admin');
+$router->get('/employee/edit', 'controllers/employees/edit.php')->only('admin');
+$router->patch('/employee', 'controllers/employees/update.php')->only('admin');
+$router->delete('/employee', 'controllers/employees/destroy.php')->only('admin');
 
-//$router->get('/admin', 'controllers/admin/create.php');
+$router->get('/admin', 'controllers/admin/create.php')->only('guest');
+$router->post('/admin', 'controllers/admin/store.php')->only('guest');
 
 //dd($router->routes);
