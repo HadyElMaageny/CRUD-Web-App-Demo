@@ -3,33 +3,29 @@
 use Core\App;
 use Core\Database;
 
-//dd($_GET);
+$db = App::resolve(Database::class);
+
 $filters = [];
 
-if (isset($_GET['id'])) {
-    $filters[] = "id LIKE :id";
-}
-if (isset($_GET['name'])) {
-    $filters[] = "name LIKE :name";
-}
-if (isset($_GET['gender'])) {
-    $filters[] = "gender LIKE :gender";
-}
-if (isset($_GET['department'])) {
-    $filters[] = "department LIKE :department";
+// Apply filters if present
+if (isset($_GET['filter_id']) && !empty($_GET['filter_id'])) {
+    $filters['id'] = $_GET['filter_id'];
 }
 
-$filterQuery = implode(' AND ', $filters);
-$query = "SELECT * FROM employees";
-
-if (!empty($filterQuery)) {
-    $query .= " WHERE " . $filterQuery;
+if (isset($_GET['filter-name']) && !empty($_GET['filter-name'])) {
+    $filters['name'] = $_GET['filter-name'];
 }
-//dd($query);
 
+if (isset($_GET['filter-gender']) && !empty($_GET['filter-gender'])) {
+    $filters['gender'] = $_GET['filter-gender'];
+}
 
+if (isset($_GET['filter-department']) && !empty($_GET['filter-department'])) {
+    $filters['department'] = $_GET['filter-department'];
+}
 
-$db = App::resolve(Database::class);
+$paginatedQuery = $db->paginationQuery($filters);
+
 $sortColumn = $_GET['sort'] ?? 'id';
 $sortDirection = $_GET['direction'] ?? 'asc';
 
@@ -43,28 +39,22 @@ if (!in_array($sortDirection, $allowedDirections)) {
     $sortDirection = 'asc'; // Fallback to 'asc' if invalid direction
 }
 
-$count = $db->query("SELECT count(id) FROM employees")->findOrFail()['count(id)'];
-
-
 if (isset($_GET['page']) && is_numeric($_GET['page']) && $_GET['page'] > 0) {
-    $currentPage = $_GET['page'] - 1;
+    $this->currentPage = $_GET['page'] - 1;
 } else {
-    $currentPage = 0;
+    $this->currentPage = 0;
 }
 
-$limit = 10;
-$offset = $currentPage * $limit;
-$pagesCount = ceil($count / $limit);
+$employees = $db->sortQuery($filters, 10,$sortColumn, $sortDirection)->all();
 
-$employees = $db->queryPage("SELECT * FROM (SELECT * FROM employees LIMIT :limit OFFSET :offset) AS limited_results ORDER BY $sortColumn $sortDirection", $limit, $offset)->all();
-
-
+//$employees = $db->queryPage($limit, $offset, $filters, $sortColumn, $sortDirection)->all();
 
 view('employees\index.view.php', [
     'heading' => "Employees List",
     'employees' => $employees,
-    'pagesCount' => $pagesCount,
-    'currentPage' => $currentPage + 1,
+    'pagesCount' => $db->PagesCount,
+    'currentPage' => $db->currentPage + 1,
     'sortColumn' => $sortColumn,
     'sortDirection' => $sortDirection,
+    'filters' => $filters,
 ]);
