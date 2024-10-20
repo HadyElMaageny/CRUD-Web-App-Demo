@@ -6,5 +6,11 @@ return [
         'port' => 3306,
         'dbname' => 'myapp',
         'charset' => 'utf8mb4'
+    ],
+    'mysqliConfig' => [
+        'host' => 'localhost',
+        'username' => 'root',
+        'password' => '1234',
+        'dbname' => 'myapp',
     ]
 ];
