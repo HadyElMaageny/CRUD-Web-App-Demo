@@ -1,10 +1,11 @@
 <?php
 
-use Core\App;
-use Core\Database;
-
-$db = App::resolve(Database::class);
-
+//
+//use Core\App;
+//use Core\Database;
+//
+//$db = App::resolve(Database::class);
+//
 $filters = [];
 
 // Apply filters if present
@@ -23,9 +24,9 @@ if (isset($_GET['filter-gender']) && !empty($_GET['filter-gender'])) {
 if (isset($_GET['filter-department']) && !empty($_GET['filter-department'])) {
     $filters['department'] = $_GET['filter-department'];
 }
-
-$paginatedQuery = $db->paginationQuery($filters);
-
+//
+//$paginatedQuery = $db->paginationQuery($filters);
+//
 $sortColumn = $_GET['sort'] ?? 'id';
 $sortDirection = $_GET['direction'] ?? 'asc';
 
@@ -39,21 +40,29 @@ if (!in_array($sortDirection, $allowedDirections)) {
     $sortDirection = 'asc'; // Fallback to 'asc' if invalid direction
 }
 
+
 if (isset($_GET['page']) && is_numeric($_GET['page']) && $_GET['page'] > 0) {
-    $this->currentPage = $_GET['page'] - 1;
+    $currentPage = $_GET['page'] - 1;
 } else {
-    $this->currentPage = 0;
+    $currentPage = 0;
 }
+$limit = 10;
 
-$employees = $db->sortQuery($filters, 10,$sortColumn, $sortDirection)->all();
+$result = getFromDB($currentPage, $filters, $limit, $sortColumn, $sortDirection);
+$count = $result['count'];
 
-//$employees = $db->queryPage($limit, $offset, $filters, $sortColumn, $sortDirection)->all();
+$PagesCount = ceil($count / $limit);
 
+$employees = $result['data'];
+////$employees = $db->sortQuery($filters, 10,$sortColumn, $sortDirection,)->all();
+
+////$employees = $db->queryPage($limit, $offset, $filters, $sortColumn, $sortDirection)->all();
+//
 view('employees\index.view.php', [
     'heading' => "Employees List",
     'employees' => $employees,
-    'pagesCount' => $db->PagesCount,
-    'currentPage' => $db->currentPage + 1,
+    'pagesCount' => $PagesCount,
+    'currentPage' => $currentPage + 1,
     'sortColumn' => $sortColumn,
     'sortDirection' => $sortDirection,
     'filters' => $filters,

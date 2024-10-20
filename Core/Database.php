@@ -9,15 +9,8 @@ class Database
     public $connection;
     public $statement;
 
-    public $params = [];
-    public $pagesCount;
-    public $currentPage;
-    public $offset;
-
     public function __construct($config, $username = 'root', $password = '1234')
     {
-
-
         $sdn = "mysql:" . http_build_query($config, '', ';');
         $this->connection = new PDO($sdn, $username, $password, [
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
@@ -41,7 +34,7 @@ class Database
 //        return $this;
 //    }
 
-    public function filterQuery($query, $filters)
+    /*public function filterQuery($query, $filters)
     {
         // Step 1: Initial filtering
         if (!empty($filters['id'])) {
@@ -62,7 +55,7 @@ class Database
         }
 
         $this->statement = $this->connection->prepare($query);
-//        $this->statement->execute($this->params);
+        $this->statement->execute($this->params);
         return $this;
     }
 
@@ -73,6 +66,7 @@ class Database
         } else {
             $this->currentPage = 0;
         }
+
 
         $this->offset = $this->currentPage * $limit;
         $filteredQueryString = $this->filterQuery("SELECT * FROM employees WHERE 1=1", $filters)->all();
@@ -120,8 +114,9 @@ class Database
         $this->statement->bindValue(':limit', $limit, PDO::PARAM_INT);
         $this->statement->bindValue(':offset', $this->offset, PDO::PARAM_INT);
         $this->statement->execute();
+        dd($this->statement->queryString);
         return $this;
-    }
+    }*/
 
     public function find()
     {
