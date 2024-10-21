@@ -33,7 +33,7 @@ class Authenticator
 
     public function logout()
     {
-        $_SESSION = [];
+        Session::flush();
 
         session_destroy();
 

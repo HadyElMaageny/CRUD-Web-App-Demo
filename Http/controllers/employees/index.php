@@ -42,11 +42,18 @@ if (isset($_GET['page']) && is_numeric($_GET['page']) && $_GET['page'] > 0) {
 }
 
 $limit = $_GET['pageSize'] ?? 10;
-//$result = getFromDB($currentPage, $filters, $limit, $sortColumn, $sortDirection);
+
+
 $result = $db->getPaginatedEmployees($currentPage, $filters, $limit, $sortColumn, $sortDirection);
+
+
 $count = $result['count'];
 $PagesCount = ceil($count / $limit);
 $employees = $result['data'];
+
+
+
+
 
 view('employees\index.view.php', [
     'heading' => "Employees List",

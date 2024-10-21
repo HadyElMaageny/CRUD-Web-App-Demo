@@ -3,6 +3,7 @@
 // login the user if the credentials match.
 
 use Core\Authenticator;
+use Core\Session;
 use Http\Forms\LoginForm;
 
 const ADMIN_ROLE_ID = 1;
@@ -21,9 +22,8 @@ if ($form->validate($email, $password)) {
     $form->error('email', 'No matching account found for this email and password.');
 }
 
-return view('session/create.view.php', [
-    'errors' => $form->errors()
-]);
+Session::flash('errors', $form->errors());
 
+return redirect('/session');
 
 
