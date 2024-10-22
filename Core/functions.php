@@ -46,8 +46,8 @@ function login($user)
 {
     $_SESSION['user'] = [
         'id' => $user['id'],
-        'email'=> $user['email'],
-        'role_id'=> $user['role_id']
+        'email' => $user['email'],
+        'role_id' => $user['role_id']
     ];
 
     session_regenerate_id(true);
@@ -68,4 +68,9 @@ function redirect($path)
 {
     header("Location: {$path}");
     exit();
+}
+
+function old($key, $default = '')
+{
+    return \Core\Session::get('old')[$key] ?? $default;
 }
